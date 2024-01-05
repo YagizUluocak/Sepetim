@@ -11,6 +11,9 @@ if(isset($_GET["urun_id"]))
 }
 $Urun2 = new Urun();
 $sepetGetir = $Urun2->sepetGetir();
+$Urun3 = new Urun();
+
+$toplamGetir = $Urun3->toplam();
 ?>
 
 
@@ -77,6 +80,7 @@ $sepetGetir = $Urun2->sepetGetir();
                             ?>
 
                         </ul>
+                        <p>Toplam Fiyat: <?php echo $toplamGetir['toplam_fiyat']?></p>
                         <button class="btn btn-success mt-3">Satın Al</button>
                     </div>
                 </div>

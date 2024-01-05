@@ -122,6 +122,16 @@ class Urun extends Db
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function toplam()
+{
+    $query = "SELECT SUM(sepet.adet * urunler.urun_fiyat) AS toplam_fiyat
+              FROM sepet
+              JOIN urunler ON sepet.urun_id = urunler.urun_id";
+    $stmt = $this->connect()->prepare($query);
+
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC); // Sadece bir satır alındığı için fetch_assoc kullanılabilir.
+}
 }
 
 ?>
