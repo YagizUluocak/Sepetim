@@ -14,6 +14,19 @@ $sepetGetir = $Urun2->sepetGetir();
 $Urun3 = new Urun();
 
 $toplamGetir = $Urun3->toplam();
+
+if(isset($_GET['islem']) && $_GET['islem'] === 'sil')
+{
+$sepet_id = $_GET["sepet_id"];
+$sepetSil = $Urun2->sepetCikart($sepet_id);
+if($sepetSil) {
+    echo "<script>window.location.href='index.php?sil=ok';</script>";
+    exit;
+} else {
+    echo "<script>window.location.href='index.php?sil=no';</script>";
+    exit;
+}
+}
 ?>
 
 
@@ -27,7 +40,7 @@ $toplamGetir = $Urun3->toplam();
     <title>Sepet Uygulaması</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Kendi CSS dosyanızı eklemek için -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="styles.css" rel="stylesheet">
 </head>
 
@@ -71,17 +84,18 @@ $toplamGetir = $Urun3->toplam();
                                 ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <h5><?php echo $sepet->urun_adi?></h5>
-                                        <p><?php echo $sepet->urun_aciklama?></p>
                                         <p><?php echo $sepet->urun_fiyat?></p>
                                         <span class="badge badge-primary badge-pill"><?php echo $sepet->adet?></span>
+                                        <a class="btn btn-danger btn-sm" href="index.php?sepet_id=<?php echo $sepet->sepet_id?>&islem=sil"><i class="fa-solid fa-trash"></i> Kaldır</a>
                                     </li>
                                 <?php
                             }
                             ?>
 
                         </ul>
-                        <p>Toplam Fiyat: <?php echo $toplamGetir['toplam_fiyat']?></p>
-                        <button class="btn btn-success mt-3">Satın Al</button>
+                        <br>
+                        <br>
+                        <p><b>Toplam Fiyat: </b><?php echo $toplamGetir['toplam_fiyat']?> ₺</p>    
                     </div>
                 </div>
             </div>
